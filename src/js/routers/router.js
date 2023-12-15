@@ -1,28 +1,29 @@
-import Router from "express";
-const router = Router();
-import productsController from "../controllers/controller";
+const express = require('express');
+const router = express.Router()
+const productsController = require('../controllers/controller');
+
 
 
 router.get("/", (req, res) => {
-    const resposta = productsController.buscar();
+    const resposta = productsController.list();
     res.send(resposta);
 });
 
 router.post("/", (req, res) => {
-    const resposta = productsController.criar();
+    const resposta = productsController.create();
     res.send(resposta);
 });
 
 router.put("/:id", (req, res) => {
     const { id } = req.params;
-    const resposta = productsController.atualizar(id);
+    const resposta = productsController.update(id);
     res.send(resposta);
 });
 
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
-    const resposta = productsController.deletar(id);
+    const resposta = productsController.delete(id);
     res.send(resposta);
 });
 
-module.exports(router);
+module.exports = router();

@@ -1,6 +1,6 @@
-import productsModel from "../models/model"
-
-const connection = await connect();
+const productsModel = require('../models/model.js');
+const { connect } = require('../db.js');
+const connection = connect();
 
 class productsController {
 list(){

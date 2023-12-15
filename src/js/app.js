@@ -1,12 +1,14 @@
-import express from 'express';
-import { connect } from './db.js';
+const express = require('express');
+const { connect } = require('./db.js')
+const connection = connect();
+const productsController = require('./controllers/controller.js');
+
 const app = express();
 const port = 3000;
-const connection = await connect();
-const router = express.Router();
-
+const router = require('./routers/router.js');
 
 app.use(router);
+
 
 // app.get(port, (req, res) => {
 //     console.log(`app online na ${port}`);
