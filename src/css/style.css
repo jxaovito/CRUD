@@ -1,0 +1,29 @@
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    margin-left: 70vh;
+    margin-right: 70vh;
+    margin-top: 26vh;
+}
+
+.inputName {
+    margin-bottom: 1.5vh;
+    padding: 1vh;
+}
+.inputDesc {
+    margin-bottom: 1.5vh;
+    padding: 1vh;
+}
+.inputPrice {
+    margin-bottom: 1.5vh;
+    padding: 1vh;
+}
+.inputQuantity {
+    margin-bottom: 1.5vh;
+    padding: 1vh;
+}
+
+.send {
+    padding: 1vh;
+    margin-bottom: 1vh;
+}
