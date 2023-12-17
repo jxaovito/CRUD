@@ -28,22 +28,8 @@ router.get("/lista", (req, res) => {
 
 router.post("/cadastro", async (req, res, next) => {
 async function create() {
-    if (!req.body || !req.body.productName || !req.body.productDesc || !req.body.productPrice || !req.body.productQuantity) {
-        console.log("ddddddddd");
-    }
-    let productId = "";
-    let productName = req.body.productName;
-    let productDesc = req.body.productDesc;
-    let productPrice = req.body.productPrice;
-    let productQuantity = req.body.productQuantity;
-
     const connection = await connect();
-    const result = await connection.query(`INSERT INTO produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("${productId}", "${productName}", "${productDesc}", "${productPrice}", "${productQuantity}")`);
-    let message = 'Error in the prodcuts creation';
-    if (result.affectedRows) {
-        message = 'Products created successfully';
-    }
-}
+    const result = await connection.query(`INSERT INTO produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("", "${req.body.productName}", "${req.body.productDesc}", "${req.body.productPrice}", "${req.body.productQuantity}")`);
 
     try {
         res.json(await create(req.body));
@@ -51,14 +37,42 @@ async function create() {
         console.error('erro durante a criação de produtos', err.message);
         next(err);
     }
-});
+}});
 
 router.put("/alteracao", (req, res) => {
  async function update(){
+    const valueSelected = req.body.selectpicker;
+    //process your data
+    res.status(200).send('Processed');
     const connection = await connect();
-    const result = await connection.query(`UPDATE produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("${productId}", "${productName}", "${productDesc}", "${productPrice}", "${productQuantity}")`);
+    const result = await connection.query(`UPDATE produtos SET nome_produto = "${productName}", descricao_produto = "${productDesc}", preco_produto = "${productPrice}", quantidade_produto = "${productQuantity}" WHERE id_produto = ${valueSelected}`);
  }
 });
+
+router.get("/form", async (req, res) => {  
+    const filePath = path.join(__dirname, "../../../updateForm.html");
+     fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Erro ao ler o arquivo');
+        }
+        res.send(data);
+
+        async function getProducts() {
+            const connection = await connect();
+            const [rows] = await connection.execute('SELECT id_produto, nome_produto FROM produtos');
+            console.log('dd', rows);
+            const updatedHtml = html.replace('<!-- SELECT_OPTIONS -->', generateSelectOptions(rows));
+            res.send(updatedHtml);
+        }
+  
+        const html = path.join(__dirname, "../../../updateForm.html");
+ 
+        function generateSelectOptions(rows) {
+            return rows.map(product => `<option value="${product.id_produto}">${product.nome_produto}</option>`).join('');
+        }
+})});
+
 
 
 module.exports = router;
