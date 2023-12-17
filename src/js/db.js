@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-import mysql from "mysql2/promise";
+const dotenv = require("dotenv");
+const mysql = require("mysql2/promise");
 
 dotenv.config();
 
@@ -24,4 +24,4 @@ async function connect(){
 }
 }
 
-export { connect };
+exports.connect = connect;
