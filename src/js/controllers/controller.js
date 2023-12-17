@@ -13,26 +13,31 @@ async function list() {
     }
 };
 
-async function create(req, res) {
-    let productId = "";
-    let productName = req.body.productName;
-    let productDesc = req.body.productDesc;
-    let productPrice = req.body.productPrice;
-    let productQuantity = req.body.productQuantity;
+// async function create(req, res) {
 
-    const connection = await connect();
-    const result = await connection.run(`INSERT INTO produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("${productId}", "${productName}", "${productDesc}", "${productPrice}", "${productQuantity}")`);
-    let message = 'Error in the prodcuts creation'
-    if (result.affectedRows) {
-        message = 'Products created successfully';
-    }
+//     if (!req.body || !req.body.productName || !req.body.productDesc || !req.body.productPrice || !req.body.productQuantity) {
+//         console.log("ddddddddd");
+//     }
 
-    console.log(message);
+//     let productId = "";
+//     let productName = req.body.productName;
+//     let productDesc = req.body.productDesc;
+//     let productPrice = req.body.productPrice;
+//     let productQuantity = req.body.productQuantity;
 
-};
+//     const connection = await connect();
+//     const result = await connection.run(`INSERT INTO produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("${productId}", "${productName}", "${productDesc}", "${productPrice}", "${productQuantity}")`);
+//     let message = 'Error in the prodcuts creation'
+//     if (result.affectedRows) {
+//         message = 'Products created successfully';
+//     }
+
+//     console.log(message);
+
+// };
 
 
 module.exports = {
     list,
-    create,
+    // create,
 };
