@@ -1,29 +1,28 @@
+const path = require('path');
 const express = require('express');
 const router = express.Router()
-const productsController = require('../controllers/controller');
-
-
+const { list } = require('../controllers/controller.js');
+const fs = require('fs');
 
 router.get("/", (req, res) => {
-    const resposta = productsController.list();
-    res.send(resposta);
+    const filePath = path.join(__dirname, "../../../index.html");
+
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Erro ao ler o arquivo');
+        }
+        res.send(data);
+})});
+
+router.get("/lista", (req, res) => {
+    const resposta = list();
+    res.json(resposta);
 });
 
-router.post("/", (req, res) => {
-    const resposta = productsController.create();
-    res.send(resposta);
+router.post("/cadastro", (req, res) => {
+    const resposta = create();
 });
 
-router.put("/:id", (req, res) => {
-    const { id } = req.params;
-    const resposta = productsController.update(id);
-    res.send(resposta);
-});
 
-router.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    const resposta = productsController.delete(id);
-    res.send(resposta);
-});
-
-module.exports = router();
+module.exports = router;

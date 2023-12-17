@@ -1,22 +1,10 @@
-const { connect } = require('../db.js')
-const connection = connect();
+// const { response } = require('express');
+// const { connect } = require('../db.js')
 
-class productsModel {
-   list(){
-        const sql = connection.query('SELECT nome_produto FROM produtos');
-        return sql;
-        };
-    
-    // create(){
-      
-    // };
-    // update(){
+// class productsModel {
+   
+   
      
-    // };
-    // delete(){
-      
-    // };
+// }
 
-}
-
-module.exports = new productsModel();
+// module.exports = new productsModel();
