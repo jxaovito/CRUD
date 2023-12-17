@@ -8,19 +8,19 @@
 </head>
 <body>
     <div class="dashboard">
-<form action="/cadastro" method="post">
-    <input type="text" id="productName" class="inputName" placeholder="Nome do produto">
-    <input type="text" id="productDesc" class="inputDesc" placeholder="Descrição do produto">
-    <input type="number" id="productPrice" class="inputPrice" placeholder="Preço do produto">
-    <input type="number" id="productQuantity" class="inputDesc" placeholder="Quantidade do produto">
+<form action="/cadastro" method="POST">
+    <input type="text" id="productName" name="productName" class="inputName" placeholder="Nome do produto">
+    <input type="text" id="productDesc" name="productDesc" class="inputDesc" placeholder="Descrição do produto">
+    <input type="number" id="productPrice" name="productPrice" class="inputPrice" placeholder="Preço do produto">
+    <input type="number" id="productQuantity" name="productQuantity" class="inputDesc" placeholder="Quantidade do produto">
     <button type="submit" id="buttonSend" class="send">Cadastrar produto</button>
 </form>
 
 </div>
-<form action="/lista" method="get">
+<form action="/lista" method="GET">
 <button type="submit" id="buttonList" class="dashboard send">Listar produtos</button>
 </form>
-    <script type="text/javascript" src="/src/js/app.js">;
+    <script src="/src/js/app.js">
     </script>
 </body>
 </html>
