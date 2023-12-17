@@ -1,10 +1,14 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router()
-const { list } = require('../controllers/controller.js');
+const { list, create } = require('../controllers/controller.js');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
-router.get("/", (req, res) => {
+router.use(express.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.get("/", (req, res) => { 
     const filePath = path.join(__dirname, "../../../index.html");
 
     fs.readFile(filePath, 'utf8', (err, data) => {
@@ -20,8 +24,13 @@ router.get("/lista", (req, res) => {
     res.json(resposta);
 });
 
-router.post("/cadastro", (req, res) => {
-    const resposta = create();
+router.post("/cadastro", async (req, res, next) => {
+    try {
+        res.json(await create(req.body));
+    } catch (err) {
+        console.error('erro durante a criação de produtos', err.message);
+        next(err);
+    }
 });
 
 

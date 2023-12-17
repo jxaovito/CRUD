@@ -1,30 +1,38 @@
 const productsModel = require('../models/model.js');
-const { connect } = require('../db.js')
+const { connect } = require('../db.js');
+
 
 async function list() {
-    try{
+    try {
         const connection = await connect();
         const products = await connection.query('SELECT nome_produto FROM produtos');
         console.log(products);
-    } catch(error) {
+    } catch (error) {
         console.error('Erro na consulta:', error);
         throw error;
     }
 };
 
-// async function create() {
-//     try{
-//         const connection = await connect();
-//         const sign = await connection.query('INSERT INTO produtos (nome_produto, descricao_produto, preco_produto, quantidade_produto) values ('+productName+','+productDesc+','+productPrice+','+productQuantity+')');
-//     } catch(error) {
-//         console.error('Erro no cadastro:', error);
-//         throw error;
-//     }
-// };
+async function create(req, res) {
+    let productId = "";
+    let productName = req.body.productName;
+    let productDesc = req.body.productDesc;
+    let productPrice = req.body.productPrice;
+    let productQuantity = req.body.productQuantity;
 
+    const connection = await connect();
+    const result = await connection.run(`INSERT INTO produtos(id_produto, nome_produto, descricao_produto, preco_produto, quantidade_produto) VALUES ("${productId}", "${productName}", "${productDesc}", "${productPrice}", "${productQuantity}")`);
+    let message = 'Error in the prodcuts creation'
+    if (result.affectedRows) {
+        message = 'Products created successfully';
+    }
 
+    console.log(message);
+
+};
 
 
 module.exports = {
     list,
+    create,
 };
