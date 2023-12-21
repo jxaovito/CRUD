@@ -8,21 +8,15 @@
 </head>
 <body>
     <div class="dashboard">
-<form action="/cadastro" method="POST">
+<form action="/register" method="POST">
     <input type="text" id="productName" name="productName" class="inputName" placeholder="Nome do produto">
     <input type="text" id="productDesc" name="productDesc" class="inputDesc" placeholder="Descrição do produto">
     <input type="number" id="productPrice" name="productPrice" class="inputPrice" placeholder="Preço do produto">
     <input type="number" id="productQuantity" name="productQuantity" class="inputDesc" placeholder="Quantidade do produto">
     <button type="submit" id="buttonSend" class="send">Cadastrar produto</button>
 </form>
-
+<a href="/form"> <button type="submit" id="buttonList" class="dashboard send">Listar produtos</button></a>
 </div>
-<form action="/form">
-    <button type="submit" id="buttonUpdate" class="dashboard send">Editar produto</button>
-</form>
-<form action="/form" method="GET">
-<button type="submit" id="buttonList" class="dashboard send">Listar produtos</button>
-</form>
     <script src="/src/js/app.js">
     </script>
 </body>
